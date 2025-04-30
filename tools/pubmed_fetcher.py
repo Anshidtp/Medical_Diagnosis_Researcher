@@ -29,7 +29,10 @@ def fetch_pubmed_articles_with_metadata(query: str, max_results=3, use_mock_if_e
             "retmode": "xml"
         }
         fetch_response = requests.get(fetch_url, params=fetch_params, headers=headers, timeout=10)
-        soup = BeautifulSoup(fetch_response.text, "lxml")
+        try:
+            soup = BeautifulSoup(fetch_response.text, "lxml")
+        except:
+            soup = BeautifulSoup(fetch_response.text, "html.parser")
         articles_xml = soup.find_all("pubmedarticle")
         print("Articles found in XML:", len(articles_xml))
 

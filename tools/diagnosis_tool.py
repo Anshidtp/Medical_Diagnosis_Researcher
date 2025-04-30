@@ -19,8 +19,7 @@ def get_diagnosis(symptoms: list[str]) -> str:
     temperature=1,
     max_completion_tokens=1024,
     top_p=1,
-    stream=True,
+    stream=False,
     stop=None,
     )
-
-    return response.choices[0].delta.content.strip()
+    return response.choices[0].message.content
